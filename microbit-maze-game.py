@@ -25,14 +25,14 @@ def find_start_point(maze):
     height = len(maze)
     possible_start_point = []
     for y in range(1, height - 1):
-        if maze[y][1] == ' ':
+        if not maze[y][1]:
             possible_start_point.append((1, y))  # Left side
-        if maze[y][width - 2] == ' ':
+        if not maze[y][width - 2]:
             possible_start_point.append((width - 2, y))  # Right side
     for x in range(1, width - 1):
-        if maze[1][x] == ' ':
+        if not maze[1][x]:
             possible_start_point.append((x, 1))  # Top side
-        if maze[height - 2][x] == ' ':
+        if not maze[height - 2][x]:
             possible_start_point.append((x, height - 2))  # Bottom side
     return choice(possible_start_point) if possible_start_point else (1, 1)
 
@@ -43,13 +43,13 @@ def find_end_point(maze):
     possible_end_point = []
     for y in range(1, height - 1):
         for x in range(1, width - 1):
-            if maze[y][x] == ' ':
+            if not maze[y][x]:
                 # Count how many walls surround this cell
                 walls = 0
-                if maze[y-1][x] == '#': walls += 1
-                if maze[y+1][x] == '#': walls += 1
-                if maze[y][x-1] == '#': walls += 1
-                if maze[y][x+1] == '#': walls += 1
+                if maze[y-1][x]: walls += 1
+                if maze[y+1][x]: walls += 1
+                if maze[y][x-1]: walls += 1
+                if maze[y][x+1]: walls += 1
                 if walls == 3:
                     possible_end_point.append((x, y))
 
